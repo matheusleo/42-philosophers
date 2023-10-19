@@ -1,7 +1,7 @@
 # Mandatory part
 NAME				:= philo
 INCLUDES		:= -I includes
-SOURCE			:= ./source/main.c ./source/utils.c
+SOURCE			:= ./source/main.c ./source/utils.c ./source/args.c
 OBJS_PATH		:= objects
 OBJS				:= $(SOURCE:./source/%.c=./$(OBJS_PATH)/%.o)
 HEADERS			:= ./includes/philosophers.h
@@ -22,7 +22,7 @@ all:			$(NAME)
 
 $(NAME):		$(OBJS) $(HEADERS)
 				@echo "$(GREEN)All object files from $(NAME) were created!$(OFF)"
-				@$(CC) $(C_FLAGS) $(INCLUDES) -o $(NAME) $(OBJS) $(LIBFT)
+				@$(CC) $(C_FLAGS) $(INCLUDES) -o $(NAME) $(OBJS)
 				@echo "$(GREEN)$(NAME) files were sucessfully linked!$(OFF)"
 
 ./$(OBJS_PATH)/%.o:	./source/%.c
@@ -32,13 +32,10 @@ $(NAME):		$(OBJS) $(HEADERS)
 clean:
 				@$(RM) $(OBJS)
 				@$(RM) $(OBJS_PATH)
-				@make -C libft/ clean
 				@echo "$(RED)The object files from $(NAME) were sucessfully removed!$(OFF)"
 
 fclean:			clean
-				@$(RM) $(NAME) $(LIBFT)
 				@echo "$(RED)The $(NAME) was removed!$(OFF)"
-				@make -C libft/ fclean
 
 re:				fclean all
 
