@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 23:12:49 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/18 23:24:51 by mleonard         ###   ########.fr       */
+/*   Created: 2023/10/18 23:04:12 by mleonard          #+#    #+#             */
+/*   Updated: 2023/10/18 23:13:16 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
-# include <stdio.h>
-# include <stdlib.h>
+#include <philosophers.h>
 
-# define TRUE 1
-# define FALSE 0
+int	ft_isdigit(int c)
+{
+	return ('0' <= c && c <= '9');
+}
 
-// Utility functions
-int	ft_isdigit(int c);
-int	ft_isnb(char *str);
+int	ft_isnb(char *str)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
