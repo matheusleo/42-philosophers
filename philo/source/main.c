@@ -6,6 +6,13 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:52 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/17 23:13:00 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/18 23:25:36 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <philosophers.h>
+
+int	main(int argc, char *argv[])
+{
+	validate_args(argc, argv);
+}
