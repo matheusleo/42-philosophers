@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 23:25:30 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/25 00:36:56 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/25 10:46:32 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ int	validate_args(int argc, char *argv[])
 			return (ERRNO_TYPE_ARGS);
 		}
 		i++;
+	}
+	if (ft_atoi(argv[NB_PHILOS_POS]) > 250)
+	{
+		printf(ERR_NB_PHILOS);
+		return (ERRNO_NB_PHILOS);
 	}
 	return (NO_ERR);
 }
