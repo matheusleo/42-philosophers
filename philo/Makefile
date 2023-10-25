@@ -1,7 +1,8 @@
 # Mandatory part
 NAME				:= philo
 INCLUDES		:= -I includes
-SOURCE			:= ./source/main.c ./source/utils.c ./source/args.c
+SOURCE			:= ./source/main.c ./source/utils.c ./source/args.c \
+							./source/forks.c
 OBJS_PATH		:= objects
 OBJS				:= $(SOURCE:./source/%.c=./$(OBJS_PATH)/%.o)
 HEADERS			:= ./includes/philosophers.h
