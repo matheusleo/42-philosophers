@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 23:25:30 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/25 11:36:31 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/25 20:30:18 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	validate_args(int argc, char *argv[])
 		printf(ERR_NB_PHILOS);
 		return (ERRNO_NB_PHILOS);
 	}
+	if (argc == 6 && ft_atoi(argv[MIN_MEALS_POS]) <= 0)
+		return (ERRNO_TYPE_ARGS);
 	return (NO_ERR);
 }
 
@@ -48,6 +50,8 @@ t_sim	*parse_args(int argc, char *argv[])
 	simulation->time_to_die = ft_atoi(argv[TIME_TO_DIE_POS]);
 	simulation->time_to_eat = ft_atoi(argv[TIME_TO_EAT_POS]);
 	simulation->time_to_sleep = ft_atoi(argv[TIME_TO_SLEEP_POS]);
-	simulation->minimum_meals = ft_atoi(argv[MIN_MEALS_POS]);
+	simulation->minimum_meals = -1;
+	if (argc == 6)
+		simulation->minimum_meals = ft_atoi(argv[MIN_MEALS_POS]);
 	return (simulation);
 }
