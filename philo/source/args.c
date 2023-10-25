@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 23:25:30 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/25 10:46:32 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:36:31 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ int	validate_args(int argc, char *argv[])
 	return (NO_ERR);
 }
 
-t_sim	*parse_args(t_sim *simulation, int argc, char *argv[])
+t_sim	*parse_args(int argc, char *argv[])
 {
+	t_sim *simulation;
+
+	simulation = (t_sim *)malloc(sizeof(t_sim));
 	simulation->nb_philo = ft_atoi(argv[NB_PHILOS_POS]);
 	simulation->time_to_die = ft_atoi(argv[TIME_TO_DIE_POS]);
 	simulation->time_to_eat = ft_atoi(argv[TIME_TO_EAT_POS]);

@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:14:46 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/25 10:40:49 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:38:22 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_sim	*init_forks(t_sim *simulation)
 	while (i < simulation->nb_philo)
 	{
 		forks[i] = (t_fork *)malloc(sizeof(t_fork));
-		forks[i]->fork_name = i + 1;
+		forks[i]->name = i + 1;
 		i++;
 	}
 	simulation->forks = forks;

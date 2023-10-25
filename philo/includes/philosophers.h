@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:49 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/25 10:46:54 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:54:24 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <pthread.h>
 /*
 	pthread_mutex_lock, pthread_mutex_unlock
+	pthread_create, pthread_join
 */
 
 # define TRUE 1
@@ -43,9 +44,16 @@ Try a value smaller than 250\n"
 
 typedef struct s_fork
 {
-	int				fork_name;
-	pthread_mutex_t	fork_mutex;
+	int				name;
+	pthread_mutex_t	mutex;
 }			t_fork;
+
+typedef struct s_philo
+{
+	int	name;
+	pthread_t	thread;
+}			t_philo;
+
 
 typedef struct s_sim
 {
@@ -55,15 +63,20 @@ typedef struct s_sim
 	unsigned int	time_to_sleep;
 	unsigned int	minimum_meals;
 	t_fork			**forks;
+	t_philo			**philos;
 }			t_sim;
 
 // Args
 int		validate_args(int argc, char *argv[]);
-t_sim	*parse_args(t_sim *simulation, int argc, char *argv[]);
+t_sim	*parse_args(int argc, char *argv[]);
 
 // Forks
 t_sim	*init_forks(t_sim *simulation);
 t_sim	*destroy_forks(t_sim *simulation);
+
+// Philos
+t_sim	*init_philos(t_sim *simulation);
+t_sim	*destroy_philos(t_sim *simulation);
 
 // Utility functions
 int		ft_isdigit(int c);
