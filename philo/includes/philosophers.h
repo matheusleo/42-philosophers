@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:49 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/25 20:55:49 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/25 23:20:44 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,13 @@ Try a value smaller than 250\n"
 # define ERRNO_NB_PHILOS 3
 # define NO_ERR 0
 
+typedef struct s_sim t_sim;
+typedef struct s_philo t_philo;
+
+
 typedef struct s_fork
 {
-	int				name;
+	int				id;
 	pthread_mutex_t	mutex;
 }			t_fork;
 
@@ -54,6 +58,7 @@ typedef struct s_philo
 {
 	int	name;
 	pthread_t	thread;
+	t_sim			*sim_config;
 }			t_philo;
 
 
@@ -67,7 +72,6 @@ typedef struct s_sim
 	t_fork			**forks;
 	t_philo			**philos;
 	unsigned long int start_time;
-	pthread_t		start_time_mutex;
 }			t_sim;
 
 // Args
@@ -75,12 +79,13 @@ int		validate_args(int argc, char *argv[]);
 t_sim	*parse_args(int argc, char *argv[]);
 
 // Forks
-t_sim	*init_forks(t_sim *simulation);
+t_sim	*create_forks(t_sim *simulation);
 t_sim	*destroy_forks(t_sim *simulation);
 
 // Philos
-t_sim	*init_philos(t_sim *simulation);
+t_sim	*create_philos(t_sim *simulation);
 t_sim	*destroy_philos(t_sim *simulation);
+t_sim	*init_philos(t_sim *simulation);
 
 // Time
 long unsigned int	get_current_time();
