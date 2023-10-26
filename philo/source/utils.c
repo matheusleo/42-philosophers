@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 23:04:12 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/24 23:37:07 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/26 00:36:05 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_isnb(char *str)
 
 int	ft_atoi(char *str)
 {
-	int	i;
+	int					i;
 	unsigned long int	nb;
 
 	i = 0;

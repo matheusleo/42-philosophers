@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 23:25:30 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/25 20:51:36 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/26 00:43:12 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	validate_args(int argc, char *argv[])
 
 t_sim	*parse_args(int argc, char *argv[])
 {
-	t_sim *simulation;
+	t_sim	*simulation;
 
 	simulation = (t_sim *)malloc(sizeof(t_sim));
 	simulation->nb_philo = ft_atoi(argv[NB_PHILOS_POS]);
