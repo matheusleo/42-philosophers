@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:49 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/25 11:54:24 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/25 20:55:49 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 	pthread_mutex_lock, pthread_mutex_unlock
 	pthread_create, pthread_join
 */
+# include <sys/time.h> //gettimeofday
+# include <unistd.h> //usleep
 
 # define TRUE 1
 # define FALSE 0
@@ -64,6 +66,8 @@ typedef struct s_sim
 	unsigned int	minimum_meals;
 	t_fork			**forks;
 	t_philo			**philos;
+	unsigned long int start_time;
+	pthread_t		start_time_mutex;
 }			t_sim;
 
 // Args
@@ -77,6 +81,10 @@ t_sim	*destroy_forks(t_sim *simulation);
 // Philos
 t_sim	*init_philos(t_sim *simulation);
 t_sim	*destroy_philos(t_sim *simulation);
+
+// Time
+long unsigned int	get_current_time();
+unsigned long int	get_rel_timestamp(t_sim *simulation);
 
 // Utility functions
 int		ft_isdigit(int c);
