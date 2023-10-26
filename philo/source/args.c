@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 23:25:30 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/25 20:30:18 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/25 20:51:36 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ t_sim	*parse_args(int argc, char *argv[])
 	simulation->minimum_meals = -1;
 	if (argc == 6)
 		simulation->minimum_meals = ft_atoi(argv[MIN_MEALS_POS]);
+	simulation->start_time = get_current_time();
 	return (simulation);
 }
