@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:49 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/26 22:03:34 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/27 02:19:10 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,18 @@ Try a value smaller than 250\n"
 # define ERRNO_NB_PHILOS 3
 # define NO_ERR 0
 
+// Messages
+# define FORK_S 0
+# define FORK_MSG "%ldms %d has taken a fork\n"
+# define EAT_S 1
+# define EAT_MSG "%ldms %d is eating\n"
+# define SLEEP_S 2
+# define SLEEP_MSG "%ldms %d is sleeping\n"
+# define THINK_S 3
+# define THINK_MSG "%ldms %d is thinking\n"
+# define DEATH_S 4
+# define DEATH_MSG "%ldms %d died\n"
+
 typedef struct s_sim	t_sim;
 typedef struct s_philo	t_philo;
 
@@ -60,11 +72,13 @@ typedef struct s_philo
 	t_sim				*sim_config;
 	unsigned long int	last_meal;
 	pthread_mutex_t		last_meal_mutex;
+	size_t				meal_count;
 }			t_philo;
 
 typedef struct s_sim
 {
-	int					should_stop;
+	int					has_stopped;
+	pthread_mutex_t		has_stopped_mutex;
 	pthread_t			monitor;
 	unsigned int		nb_philo;
 	unsigned int		time_to_die;
@@ -74,8 +88,8 @@ typedef struct s_sim
 	t_fork				**forks;
 	t_philo				**philos;
 	unsigned long int	start_time;
+	pthread_mutex_t		output_mutex;
 }			t_sim;
-
 // Args
 int					validate_args(int argc, char *argv[]);
 t_sim				*parse_args(int argc, char *argv[]);
@@ -97,9 +111,13 @@ unsigned long int	get_rel_timestamp(t_sim *simulation);
 t_sim				*monitor(t_sim *simulation);
 t_sim				*init_monitor(t_sim *simulation);
 
+// Logs
+void				log_status(t_sim *sim, int status, int philo);
+
 // Utility functions
 int					ft_isdigit(int c);
 int					ft_isnb(char *str);
 int					ft_atoi(char *str);
+void				stop_thread(int ms);
 
 #endif
