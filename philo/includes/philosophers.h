@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:49 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/26 00:42:25 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/26 22:03:34 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_philo
 
 typedef struct s_sim
 {
+	int					should_stop;
 	pthread_t			monitor;
 	unsigned int		nb_philo;
 	unsigned int		time_to_die;
@@ -94,6 +95,7 @@ unsigned long int	get_rel_timestamp(t_sim *simulation);
 
 // Philo monitor
 t_sim				*monitor(t_sim *simulation);
+t_sim				*init_monitor(t_sim *simulation);
 
 // Utility functions
 int					ft_isdigit(int c);
