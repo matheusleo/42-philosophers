@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 23:04:12 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/26 00:36:05 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/27 01:24:07 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,9 @@ int	ft_atoi(char *str)
 	if (nb > INT_MAX)
 		return (-1);
 	return ((int)(nb));
+}
+
+void	stop_thread(int ms)
+{
+	usleep(1000 * ms);
 }
