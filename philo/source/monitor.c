@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 23:35:11 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 13:40:35 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:42:09 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	*monitor(void *data)
 	simulation = (t_sim *)data;
 	while (TRUE)
 	{
-		if (simulation->start_time == 0)
+		if (get_start_time(simulation) == 0)
 			continue ;
 		has_philo_died = check_philos_deaths(simulation);
 		if (has_philo_died)
