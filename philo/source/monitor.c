@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 23:35:11 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 02:28:10 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 13:40:35 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	*monitor(void *data)
 	simulation = (t_sim *)data;
 	while (TRUE)
 	{
+		if (simulation->start_time == 0)
+			continue ;
 		has_philo_died = check_philos_deaths(simulation);
 		if (has_philo_died)
 			break ;
@@ -96,6 +98,5 @@ void	*monitor(void *data)
 t_sim	*init_monitor(t_sim *simulation)
 {
 	pthread_create(&(simulation->monitor), NULL, monitor, simulation);
-	pthread_join(simulation->monitor, NULL);
 	return (simulation);
 }

@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 00:42:29 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 02:29:22 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 13:22:47 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	*lone_philo(void *data)
 
 	philo = (t_philo *)data;
 	id = philo->name;
+	while (philo->sim_config->start_time == 0)
+		continue ;
 	pthread_mutex_lock(&(philo->sim_config->forks[id]->mutex));
 	log_status(philo, FORK_S);
 	pthread_mutex_unlock(&(philo->sim_config->forks[id]->mutex));
@@ -70,6 +72,10 @@ void	*philo(void *data)
 		fork_1 = id + (id % 2 - 1);
 	fork_2 = id + ((id + 1) % 2 - 1);
 	while (!has_sim_stopped(philo->sim_config))
+	{
+		if (philo->sim_config->start_time == 0)
+			continue ;
 		philo_routine(philo, fork_1, fork_2);
+	}
 	return (NULL);
 }
