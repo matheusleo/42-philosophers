@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 20:34:18 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/26 00:43:28 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 19:32:40 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ unsigned long int	get_rel_timestamp(t_sim *simulation)
 	unsigned long int	now;
 	unsigned long int	diff;
 
-	now = get_current_time();
+	now = get_current_time() + simulation->start_delay;
 	diff = now - simulation->start_time;
 	return (diff);
 }

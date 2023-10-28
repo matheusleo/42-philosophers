@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:52 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 13:41:02 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 19:32:32 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static int	init_sim(t_sim *simulation)
 	create_philos(simulation);
 	init_monitor(simulation);
 	init_philos(simulation);
-	simulation->start_time = get_current_time();
+	simulation->start_delay = simulation->nb_philo * 2 * 10;
+	simulation->start_time = get_current_time() + simulation->start_delay;
 	pthread_join(simulation->monitor, NULL);
 	while (i < simulation->nb_philo)
 	{

@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:49 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 02:27:52 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 19:31:58 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_sim
 	t_fork				**forks;
 	t_philo				**philos;
 	unsigned long int	start_time;
+	long int					start_delay;
 	pthread_mutex_t		output_mutex;
 }			t_sim;
 // Args
