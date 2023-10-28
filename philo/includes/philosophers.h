@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:49 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/27 02:19:10 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 00:46:50 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,11 @@ t_sim				*destroy_forks(t_sim *simulation);
 t_sim				*create_philos(t_sim *simulation);
 t_sim				*destroy_philos(t_sim *simulation);
 t_sim				*init_philos(t_sim *simulation);
+void				*philo(t_philo *philo);
+
+// Philos actions
+void				*lone_philo(t_philo *philo);
+void				*philo_routine(t_philo *philo, int fork_1, int fork_2);
 
 // Time
 long unsigned int	get_current_time(void);
@@ -110,9 +115,10 @@ unsigned long int	get_rel_timestamp(t_sim *simulation);
 // Philo monitor
 t_sim				*monitor(t_sim *simulation);
 t_sim				*init_monitor(t_sim *simulation);
+int					has_sim_stopped(t_sim *simulation);
 
 // Logs
-void				log_status(t_sim *sim, int status, int philo);
+void				log_status(t_philo *philo, int status);
 
 // Utility functions
 int					ft_isdigit(int c);
