@@ -1,3 +1,6 @@
 # Binaries
 philo/objects
 philo/philo
+
+# Test files
+test*
