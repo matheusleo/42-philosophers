@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 23:35:11 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 00:50:50 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 02:28:10 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	check_philos_deaths(t_sim *simulation)
 {
 	size_t				i;
 	unsigned long int	rel_offset;
-	int					nb_philos;
+	size_t				nb_philos;
 	t_philo				**philos;
 
 	i = 0;
@@ -70,11 +70,13 @@ int	has_sim_stopped(t_sim *simulation)
 	return (status);
 }
 
-t_sim	*monitor(t_sim *simulation)
+void	*monitor(void *data)
 {
-	int	has_philo_died;
-	int	min_meals_eaten;
+	t_sim	*simulation;
+	int		has_philo_died;
+	int		min_meals_eaten;
 
+	simulation = (t_sim *)data;
 	while (TRUE)
 	{
 		has_philo_died = check_philos_deaths(simulation);
@@ -95,4 +97,5 @@ t_sim	*init_monitor(t_sim *simulation)
 {
 	pthread_create(&(simulation->monitor), NULL, monitor, simulation);
 	pthread_join(simulation->monitor, NULL);
+	return (simulation);
 }

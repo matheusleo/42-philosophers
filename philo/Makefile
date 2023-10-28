@@ -10,7 +10,7 @@ HEADERS			:= ./includes/philosophers.h
 
 # General purpose
 CC				:= cc
-# C_FLAGS		:= -Wall -Werror -Wextra
+C_FLAGS		:= -Wall -Werror -Wextra
 RM				:= rm -rf
 
 # Colors

@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:14:46 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/25 23:18:07 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 02:21:46 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ t_sim	*destroy_forks(t_sim *simulation)
 		i++;
 	}
 	free(simulation->forks);
+	return (simulation);
 }

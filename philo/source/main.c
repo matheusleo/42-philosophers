@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:52 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 00:28:56 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 02:21:27 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	init_sim(t_sim *simulation)
 		pthread_join(simulation->philos[i]->thread, NULL);
 		i++;
 	}
+	return (NO_ERR);
 }
 
 static int	end_sim(t_sim *simulation)
