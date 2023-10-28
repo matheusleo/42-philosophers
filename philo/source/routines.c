@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 00:42:29 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 00:48:22 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 02:12:36 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@ void	*lone_philo(t_philo *philo)
 	pthread_mutex_lock(&(philo->sim_config->forks[id]->mutex));
 	log_status(philo, FORK_S);
 	pthread_mutex_unlock(&(philo->sim_config->forks[id]->mutex));
+}
+
+void	*think(t_philo *philo)
+{
+	int	time_to_think;
+
+	log_status(philo, THINK_S);
+	time_to_think = 1;
+	stop_thread(time_to_think);
 }
 
 void	*philo_routine(t_philo *philo, int fork_1, int fork_2)
@@ -38,23 +47,21 @@ void	*philo_routine(t_philo *philo, int fork_1, int fork_2)
 	pthread_mutex_unlock(&(philo->sim_config->forks[fork_2]->mutex));
 	log_status(philo, SLEEP_S);
 	stop_thread(philo->sim_config->time_to_sleep);
-	log_status(philo, THINK_S);
+	think(philo);
 }
 
 void	*philo(t_philo *philo)
 {
 	int		id;
-	t_sim	*sim_config;
 	int		fork_1;
 	int		fork_2;
 
 	id = philo->name;
-	sim_config = philo->sim_config;
 	if (id == 0)
-		fork_1 = sim_config->nb_philo - 1;
+		fork_1 = (philo->sim_config->nb_philo) - 1;
 	else
 		fork_1 = id + (id % 2 - 1);
 	fork_2 = id + ((id + 1) % 2 - 1);
-	while (!has_sim_stopped(sim_config))
+	while (!has_sim_stopped(philo->sim_config))
 		philo_routine(philo, fork_1, fork_2);
 }
