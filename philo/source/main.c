@@ -6,19 +6,46 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:52 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/25 00:38:19 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 00:28:56 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
-int main(int argc, char *argv[])
+static int	init_sim(t_sim *simulation)
 {
-	t_sim simulation;
-	int err;
+	size_t	i;
 
+	i = 0;
+	create_forks(simulation);
+	create_philos(simulation);
+	init_philos(simulation);
+	init_monitor(simulation);
+	while (i < simulation->nb_philo)
+	{
+		pthread_join(simulation->philos[i]->thread, NULL);
+		i++;
+	}
+}
+
+static int	end_sim(t_sim *simulation)
+{
+	destroy_forks(simulation);
+	destroy_philos(simulation);
+	free(simulation);
+	return (NO_ERR);
+}
+
+int	main(int argc, char *argv[])
+{
+	t_sim	*simulation;
+	int		err;
+
+	simulation = NULL;
 	err = validate_args(argc, argv);
 	if (err)
 		return (err);
-	parse_args(&simulation, argc, argv);
+	simulation = parse_args(argc, argv);
+	init_sim(simulation);
+	end_sim(simulation);
 }
