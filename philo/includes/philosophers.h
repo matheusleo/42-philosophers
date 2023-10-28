@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:49 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 02:27:52 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:39:14 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_sim
 	t_fork				**forks;
 	t_philo				**philos;
 	unsigned long int	start_time;
+	pthread_mutex_t		start_time_mutex;
 	pthread_mutex_t		output_mutex;
 }			t_sim;
 // Args
@@ -111,6 +112,7 @@ void				*philo_routine(t_philo *philo, int fork_1, int fork_2);
 // Time
 long unsigned int	get_current_time(void);
 unsigned long int	get_rel_timestamp(t_sim *simulation);
+unsigned long int	get_start_time(t_sim *simulation);
 
 // Philo monitor
 void				*monitor(void *data);
