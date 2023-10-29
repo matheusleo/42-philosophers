@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:49 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 21:30:29 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/29 00:58:13 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,16 @@ typedef struct s_sim
 	pthread_mutex_t		start_time_mutex;
 	pthread_mutex_t		output_mutex;
 }			t_sim;
+
 // Args
 int					validate_args(int argc, char *argv[]);
 t_sim				*parse_args(int argc, char *argv[]);
+
+// Simulation
+int					init_sim(t_sim *simulation);
+int					end_sim(t_sim *simulation);
+int					has_sim_stopped(t_sim *simulation);
+int					set_sim_stop(t_sim *simulation);
 
 // Forks
 t_sim				*create_forks(t_sim *simulation);
