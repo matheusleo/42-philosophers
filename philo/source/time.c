@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 20:34:18 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 21:29:50 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/29 00:13:26 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 unsigned long int	get_start_time(t_sim *simulation)
 {
-
 	unsigned long int	now;
 
 	pthread_mutex_lock(&(simulation->start_time_mutex));

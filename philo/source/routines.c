@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 00:42:29 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 21:37:30 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/29 00:13:17 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	*philo_routine(t_philo *philo, int fork_1, int fork_2)
 	log_status(philo, FORK_S);
 	log_status(philo, EAT_S);
 	pthread_mutex_lock(&(philo->last_meal_mutex));
-	philo->last_meal =  get_current_time();
+	philo->last_meal = get_current_time();
 	philo->meal_count++;
 	pthread_mutex_unlock(&(philo->last_meal_mutex));
 	stop_thread(philo->sim_config->time_to_eat);
