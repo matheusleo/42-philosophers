@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 00:42:29 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/29 05:02:29 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/29 05:28:04 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,22 @@ void	*lone_philo(void *data)
 // pthread_mutex_unlock(&(philo->last_meal_mutex));
 // if (time_to_think < 0)
 // time_to_think = 0;
-void	*think(t_philo *philo)
+// void	*think(t_philo *philo)
+// {
+// 	long int	time_to_think;
+
+// 	log_status(philo, THINK_S);
+// 	pthread_mutex_lock(&(philo->last_meal_mutex));
+// 	time_to_think = philo->last_meal
+// 									+ philo->sim_config->time_to_die
+// 									- get_current_time();
+// 	printf("time_to_think %ld\n", time_to_think);
+// 	pthread_mutex_unlock(&(philo->last_meal_mutex));
+// 	usleep(time_to_think);
+// 	return (NULL);
+// }
+
+static void	*think(t_philo *philo)
 {
 	int	time_to_think;
 
