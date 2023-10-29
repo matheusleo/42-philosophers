@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:49 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/29 03:35:37 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/29 05:02:54 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_fork
 
 typedef struct s_philo
 {
-	pthread_mutex_t	death;
+	pthread_mutex_t		death;
 	int					name;
 	pthread_t			thread;
 	t_sim				*sim_config;

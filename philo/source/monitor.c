@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 23:35:11 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/29 03:36:54 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/29 04:43:50 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,16 @@ static int	check_philos_deaths(t_sim *simulation)
 	has_philo_eaten = FALSE;
 	while (i < nb_philos)
 	{
-		pthread_mutex_lock(&(philos[i]->death));
 		pthread_mutex_lock(&(philos[i]->last_meal_mutex));
-		has_philo_eaten = philos[i]->last_meal;
+		has_philo_eaten = philos[i]->last_meal > 0;
 		rel_offset = get_current_time() - philos[i]->last_meal;
 		pthread_mutex_unlock(&(philos[i]->last_meal_mutex));
-		if (has_philo_eaten && rel_offset >= simulation->time_to_die)
+		if (has_philo_eaten && rel_offset > simulation->time_to_die)
 		{
 			set_sim_stop(simulation);
-			pthread_mutex_unlock(&(philos[i]->death));
 			log_status(philos[i], DEATH_S);
 			return (++i);
 		}
-		pthread_mutex_unlock(&(philos[i]->death));
 		i++;
 	}
 	return (NO_ERR);

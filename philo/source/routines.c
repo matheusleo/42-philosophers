@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 00:42:29 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/29 03:38:50 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/29 05:02:29 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ void	*lone_philo(void *data)
 	return (NULL);
 }
 
+// pthread_mutex_lock(&(philo->last_meal_mutex));
+// time_to_think = (philo->sim_config->time_to_die
+// 								- (get_current_time() - philo->last_meal)
+// 								- philo->sim_config->time_to_eat
+// 								- philo->sim_config->time_to_sleep) / 2;
+// pthread_mutex_unlock(&(philo->last_meal_mutex));
+// if (time_to_think < 0)
+// time_to_think = 0;
 void	*think(t_philo *philo)
 {
 	int	time_to_think;
 
-	// pthread_mutex_lock(&(philo->last_meal_mutex));
-	// time_to_think = (philo->sim_config->time_to_die
-	// 								- (get_current_time() - philo->last_meal)
-	// 								- philo->sim_config->time_to_eat
-	// 								- philo->sim_config->time_to_sleep) / 2;
-	// pthread_mutex_unlock(&(philo->last_meal_mutex));
 	log_status(philo, THINK_S);
-	// if (time_to_think < 0)
-		// time_to_think = 0;
-		time_to_think = 500;
+	time_to_think = 500;
 	usleep(time_to_think);
 	return (NULL);
 }
@@ -52,15 +52,13 @@ void	*philo_routine(t_philo *philo, int fork_1, int fork_2)
 	pthread_mutex_lock(&(philo->sim_config->forks[fork_1]->mutex));
 	log_status(philo, FORK_S);
 	pthread_mutex_lock(&(philo->sim_config->forks[fork_2]->mutex));
-	pthread_mutex_lock(&(philo->death));
 	log_status(philo, FORK_S);
 	log_status(philo, EAT_S);
 	pthread_mutex_lock(&(philo->last_meal_mutex));
 	philo->last_meal = get_current_time();
 	philo->meal_count++;
-	pthread_mutex_unlock(&(philo->last_meal_mutex));
-	pthread_mutex_unlock(&(philo->death));
 	stop_thread(philo->sim_config->time_to_eat);
+	pthread_mutex_unlock(&(philo->last_meal_mutex));
 	pthread_mutex_unlock(&(philo->sim_config->forks[fork_1]->mutex));
 	pthread_mutex_unlock(&(philo->sim_config->forks[fork_2]->mutex));
 	log_status(philo, SLEEP_S);
