@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 00:39:58 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/29 04:35:58 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/29 06:50:51 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 // https://www.youtube.com/watch?v=lWzZ2l5n81c
 void	log_status(t_philo *philo, int status)
 {
-	int					philo_id;
-	t_sim				*sim_config;
-	unsigned long int	ts;
+	int		philo_id;
+	t_sim	*sim_config;
+	time_t	ts;
 
 	philo_id = philo->name;
 	sim_config = philo->sim_config;

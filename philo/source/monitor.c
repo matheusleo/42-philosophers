@@ -6,33 +6,33 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 23:35:11 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/29 04:43:50 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/29 06:55:11 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
-static int	check_philos_deaths(t_sim *simulation)
+static int	check_philos_deaths(t_sim *sim)
 {
 	size_t				i;
-	unsigned long int	rel_offset;
 	size_t				nb_philos;
 	t_philo				**philos;
-	int					has_philo_eaten;
+	unsigned long int	should_check;
+	time_t				rel_offset;
 
 	i = 0;
-	nb_philos = simulation->nb_philo;
-	philos = simulation->philos;
-	has_philo_eaten = FALSE;
+	nb_philos = sim->nb_philo;
+	philos = sim->philos;
 	while (i < nb_philos)
 	{
 		pthread_mutex_lock(&(philos[i]->last_meal_mutex));
-		has_philo_eaten = philos[i]->last_meal > 0;
+		should_check = get_current_time() - get_start_time(sim) \
+			> sim->time_to_die;
 		rel_offset = get_current_time() - philos[i]->last_meal;
 		pthread_mutex_unlock(&(philos[i]->last_meal_mutex));
-		if (has_philo_eaten && rel_offset > simulation->time_to_die)
+		if (should_check && rel_offset > sim->time_to_die)
 		{
-			set_sim_stop(simulation);
+			set_sim_stop(sim);
 			log_status(philos[i], DEATH_S);
 			return (++i);
 		}
@@ -83,7 +83,7 @@ void	*monitor(void *data)
 			if (min_meals_eaten == TRUE)
 				break ;
 		}
-		usleep(1000);
+		usleep(100);
 	}
 	return (simulation);
 }
