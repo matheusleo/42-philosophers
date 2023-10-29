@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:49 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/29 05:47:23 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/29 06:44:46 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ typedef struct s_fork
 
 typedef struct s_philo
 {
-	pthread_mutex_t		death;
-	int					name;
-	pthread_t			thread;
-	t_sim				*sim_config;
-	unsigned long int	last_meal;
-	pthread_mutex_t		last_meal_mutex;
-	size_t				meal_count;
+	pthread_mutex_t	death;
+	int				name;
+	pthread_t		thread;
+	t_sim			*sim_config;
+	time_t			last_meal;
+	pthread_mutex_t	last_meal_mutex;
+	size_t			meal_count;
 }			t_philo;
 
 typedef struct s_sim
@@ -88,7 +88,7 @@ typedef struct s_sim
 	unsigned int		minimum_meals;
 	t_fork				**forks;
 	t_philo				**philos;
-	unsigned long int	start_time;
+	time_t				start_time;
 	pthread_mutex_t		start_time_mutex;
 	pthread_mutex_t		output_mutex;
 }			t_sim;
@@ -118,8 +118,8 @@ void				*lone_philo(void *data);
 void				*philo_routine(t_philo *philo, int fork_1, int fork_2);
 
 // Time
-long unsigned int	get_current_time(void);
-unsigned long int	get_start_time(t_sim *simulation);
+time_t				get_current_time(void);
+time_t				get_start_time(t_sim *simulation);
 
 // Philo monitor
 void				*monitor(void *data);

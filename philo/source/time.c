@@ -6,15 +6,15 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 20:34:18 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/29 05:47:53 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/29 06:38:59 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
-unsigned long int	get_start_time(t_sim *simulation)
+time_t	get_start_time(t_sim *simulation)
 {
-	unsigned long int	now;
+	time_t	now;
 
 	pthread_mutex_lock(&(simulation->start_time_mutex));
 	now = simulation->start_time;
@@ -22,7 +22,7 @@ unsigned long int	get_start_time(t_sim *simulation)
 	return (now);
 }
 
-unsigned long int	get_current_time(void)
+time_t	get_current_time(void)
 {
 	struct timeval	time;
 
