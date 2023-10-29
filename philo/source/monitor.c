@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 23:35:11 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 21:34:33 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 23:58:35 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,14 @@ static int	check_philos_meals(t_sim *simulation)
 	philos = simulation->philos;
 	while (i < simulation->nb_philo)
 	{
+		pthread_mutex_lock(&(philos[i]->last_meal_mutex));
 		if (philos[i]->meal_count < simulation->minimum_meals)
+		{
+
+			pthread_mutex_unlock(&(philos[i]->last_meal_mutex));
 			return (FALSE);
+		}
+		pthread_mutex_unlock(&(philos[i]->last_meal_mutex));
 		i++;
 	}
 	pthread_mutex_lock(&(simulation->has_stopped_mutex));
