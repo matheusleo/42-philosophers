@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 00:42:29 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/29 01:02:28 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/29 01:05:11 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ void	*philo(void *data)
 	philo = (t_philo *)data;
 	id = philo->name;
 	fork_1 = id;
-	fork_2 = id + 1 % philo->sim_config->nb_philo;
+	fork_2 = (id + 1) % philo->sim_config->nb_philo;
 	if (id % 2)
 	{
-		fork_1 = id + 1 % philo->sim_config->nb_philo;
+		fork_1 = (id + 1) % philo->sim_config->nb_philo;
 		fork_2 = id;
 	}
 	while (!has_sim_stopped(philo->sim_config))
