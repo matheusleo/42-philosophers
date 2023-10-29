@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 00:42:29 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 19:19:31 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/29 05:47:46 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,47 @@ void	*lone_philo(void *data)
 
 	philo = (t_philo *)data;
 	id = philo->name;
-	while (philo->sim_config->start_time == 0)
+	while (get_start_time(philo->sim_config) == 0)
 		continue ;
 	pthread_mutex_lock(&(philo->sim_config->forks[id]->mutex));
 	log_status(philo, FORK_S);
 	pthread_mutex_unlock(&(philo->sim_config->forks[id]->mutex));
+	stop_thread(philo->sim_config->time_to_die);
+	log_status(philo, DEATH_S);
 	return (NULL);
 }
 
-void	*think(t_philo *philo)
+// pthread_mutex_lock(&(philo->last_meal_mutex));
+// time_to_think = (philo->sim_config->time_to_die
+// 								- (get_current_time() - philo->last_meal)
+// 								- philo->sim_config->time_to_eat
+// 								- philo->sim_config->time_to_sleep) / 2;
+// pthread_mutex_unlock(&(philo->last_meal_mutex));
+// if (time_to_think < 0)
+// time_to_think = 0;
+// void	*think(t_philo *philo)
+// {
+// 	long int	time_to_think;
+
+// 	log_status(philo, THINK_S);
+// 	pthread_mutex_lock(&(philo->last_meal_mutex));
+// 	time_to_think = philo->last_meal
+// 									+ philo->sim_config->time_to_die
+// 									- get_current_time();
+// 	printf("time_to_think %ld\n", time_to_think);
+// 	pthread_mutex_unlock(&(philo->last_meal_mutex));
+// 	usleep(time_to_think);
+// 	return (NULL);
+// }
+
+static void	*think(t_philo *philo)
 {
 	// long int	time_to_think;
 	// long int	wake_up;
 
 	log_status(philo, THINK_S);
-	// time_to_think = philo->sim_config->time_to_die / 2;
-	// - philo->sim_config->time_to_eat
-	// - philo ->sim_config->time_to_sleep;
-	// printf("time_to_think %ld\n", time_to_think);
-	// pthread_mutex_lock(&(philo->last_meal_mutex));
-	// wake_up = philo->last_meal + time_to_think;
-	// pthread_mutex_unlock(&(philo->last_meal_mutex));
-	// if (!wake_up)
-	// 	wake_up = philo->last_meal;
-	// while ((long int)get_rel_timestamp(philo->sim_config) < wake_up)
-	usleep(100);
+	time_to_think = 500;
+	usleep(time_to_think);
 	return (NULL);
 }
 
@@ -55,10 +71,10 @@ void	*philo_routine(t_philo *philo, int fork_1, int fork_2)
 	log_status(philo, FORK_S);
 	log_status(philo, EAT_S);
 	pthread_mutex_lock(&(philo->last_meal_mutex));
-	philo->last_meal = get_rel_timestamp(philo->sim_config);
+	philo->last_meal = get_current_time();
 	philo->meal_count++;
-	pthread_mutex_unlock(&(philo->last_meal_mutex));
 	stop_thread(philo->sim_config->time_to_eat);
+	pthread_mutex_unlock(&(philo->last_meal_mutex));
 	pthread_mutex_unlock(&(philo->sim_config->forks[fork_1]->mutex));
 	pthread_mutex_unlock(&(philo->sim_config->forks[fork_2]->mutex));
 	log_status(philo, SLEEP_S);
@@ -76,14 +92,16 @@ void	*philo(void *data)
 
 	philo = (t_philo *)data;
 	id = philo->name;
-	if (id == 0)
-		fork_1 = (philo->sim_config->nb_philo) - 1;
-	else
-		fork_1 = id + (id % 2 - 1);
-	fork_2 = id + ((id + 1) % 2 - 1);
+	fork_1 = id;
+	fork_2 = (id + 1) % philo->sim_config->nb_philo;
+	if (id % 2)
+	{
+		fork_1 = (id + 1) % philo->sim_config->nb_philo;
+		fork_2 = id;
+	}
 	while (!has_sim_stopped(philo->sim_config))
 	{
-		if (philo->sim_config->start_time == 0)
+		if (get_start_time(philo->sim_config) == 0)
 			continue ;
 		philo_routine(philo, fork_1, fork_2);
 	}
