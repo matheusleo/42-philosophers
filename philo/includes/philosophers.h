@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:49 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 20:39:14 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:30:29 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void				*philo_routine(t_philo *philo, int fork_1, int fork_2);
 
 // Time
 long unsigned int	get_current_time(void);
-unsigned long int	get_rel_timestamp(t_sim *simulation);
 unsigned long int	get_start_time(t_sim *simulation);
 
 // Philo monitor

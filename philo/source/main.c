@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:12:52 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 20:36:39 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:36:03 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,18 @@ static int	init_sim(t_sim *simulation)
 	i = 0;
 	create_forks(simulation);
 	create_philos(simulation);
-	init_monitor(simulation);
 	init_philos(simulation);
+	if (simulation->nb_philo > 1)
+		init_monitor(simulation);
 	pthread_mutex_lock(&(simulation->start_time_mutex));
 	simulation->start_time = get_current_time();
 	pthread_mutex_unlock(&(simulation->start_time_mutex));
-	pthread_join(simulation->monitor, NULL);
 	while (i < simulation->nb_philo)
 	{
 		pthread_join(simulation->philos[i]->thread, NULL);
 		i++;
 	}
+	pthread_join(simulation->monitor, NULL);
 	return (NO_ERR);
 }
 

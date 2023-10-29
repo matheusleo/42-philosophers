@@ -6,7 +6,7 @@
 /*   By: mleonard <mleonard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 00:42:29 by mleonard          #+#    #+#             */
-/*   Updated: 2023/10/28 20:42:21 by mleonard         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:37:30 by mleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	*lone_philo(void *data)
 	pthread_mutex_lock(&(philo->sim_config->forks[id]->mutex));
 	log_status(philo, FORK_S);
 	pthread_mutex_unlock(&(philo->sim_config->forks[id]->mutex));
+	stop_thread(philo->sim_config->time_to_die);
+	log_status(philo, DEATH_S);
 	return (NULL);
 }
 
@@ -45,7 +47,7 @@ void	*philo_routine(t_philo *philo, int fork_1, int fork_2)
 	log_status(philo, FORK_S);
 	log_status(philo, EAT_S);
 	pthread_mutex_lock(&(philo->last_meal_mutex));
-	philo->last_meal = get_rel_timestamp(philo->sim_config);
+	philo->last_meal =  get_current_time();
 	philo->meal_count++;
 	pthread_mutex_unlock(&(philo->last_meal_mutex));
 	stop_thread(philo->sim_config->time_to_eat);
